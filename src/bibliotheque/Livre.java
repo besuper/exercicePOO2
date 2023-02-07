@@ -18,6 +18,38 @@ public class Livre extends Ouvrage {
         this.resume = resume;
     }
 
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public int getNombrePages() {
+        return nombrePages;
+    }
+
+    public void setNombrePages(int nombrePages) {
+        this.nombrePages = nombrePages;
+    }
+
+    public TypeLivre getTypeLivre() {
+        return typeLivre;
+    }
+
+    public void setTypeLivre(TypeLivre typeLivre) {
+        this.typeLivre = typeLivre;
+    }
+
+    public String getResume() {
+        return resume;
+    }
+
+    public void setResume(String resume) {
+        this.resume = resume;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -29,5 +61,15 @@ public class Livre extends Ouvrage {
     @Override
     public int hashCode() {
         return Objects.hash(isbn);
+    }
+
+    @Override
+    public String toString() {
+        return "Livre{" +
+                "isbn='" + isbn + '\'' +
+                ", nombrePages=" + nombrePages +
+                ", typeLivre=" + typeLivre +
+                ", resume='" + resume + '\'' +
+                '}';
     }
 }

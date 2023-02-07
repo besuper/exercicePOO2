@@ -17,6 +17,30 @@ public class CD extends Ouvrage{
         this.dureeTotale = dureeTotale;
     }
 
+    public long getCode() {
+        return code;
+    }
+
+    public void setCode(long code) {
+        this.code = code;
+    }
+
+    public byte getNbrePlages() {
+        return nbrePlages;
+    }
+
+    public void setNbrePlages(byte nbrePlages) {
+        this.nbrePlages = nbrePlages;
+    }
+
+    public String getDureeTotale() {
+        return dureeTotale;
+    }
+
+    public void setDureeTotale(String dureeTotale) {
+        this.dureeTotale = dureeTotale;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -28,5 +52,14 @@ public class CD extends Ouvrage{
     @Override
     public int hashCode() {
         return Objects.hash(code);
+    }
+
+    @Override
+    public String toString() {
+        return "CD{" +
+                "code=" + code +
+                ", nbrePlages=" + nbrePlages +
+                ", dureeTotale='" + dureeTotale + '\'' +
+                '}';
     }
 }
