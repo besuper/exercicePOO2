@@ -1,27 +1,26 @@
 package bibliotheque;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Ouvrage {
-
     protected String titre;
-    protected byte ageMin;
+    protected int ageMin;
     protected String dateParution;
-    protected TypeOuvrage typeOuvrage;
+    protected TypeOuvrage to;
     protected double prixLocation;
     protected String langue;
     protected String genre;
 
-    private List<Exemplaire> exemplaires = new ArrayList<>();
-    private List<Auteur> auteurs = new ArrayList<>();
+    protected List<Auteur> lauteurs=new ArrayList<>();
+    protected List<Exemplaire> lex = new ArrayList<>();
 
-    public Ouvrage(String titre, byte ageMin, String dateParution, TypeOuvrage typeOuvrage, double prixLocation, String langue, String genre) {
+
+    public Ouvrage(String titre, int ageMin, String dateParution, TypeOuvrage to, double prixLocation, String langue, String genre) {
         this.titre = titre;
         this.ageMin = ageMin;
         this.dateParution = dateParution;
-        this.typeOuvrage = typeOuvrage;
+        this.to = to;
         this.prixLocation = prixLocation;
         this.langue = langue;
         this.genre = genre;
@@ -35,11 +34,11 @@ public abstract class Ouvrage {
         this.titre = titre;
     }
 
-    public byte getAgeMin() {
+    public int getAgeMin() {
         return ageMin;
     }
 
-    public void setAgeMin(byte ageMin) {
+    public void setAgeMin(int ageMin) {
         this.ageMin = ageMin;
     }
 
@@ -51,12 +50,12 @@ public abstract class Ouvrage {
         this.dateParution = dateParution;
     }
 
-    public TypeOuvrage getTypeOuvrage() {
-        return typeOuvrage;
+    public TypeOuvrage getTo() {
+        return to;
     }
 
-    public void setTypeOuvrage(TypeOuvrage typeOuvrage) {
-        this.typeOuvrage = typeOuvrage;
+    public void setTo(TypeOuvrage to) {
+        this.to = to;
     }
 
     public double getPrixLocation() {
@@ -83,20 +82,20 @@ public abstract class Ouvrage {
         this.genre = genre;
     }
 
-    public List<Exemplaire> getExemplaires() {
-        return exemplaires;
+    public List<Auteur> getLauteurs() {
+        return lauteurs;
     }
 
-    public void setExemplaires(List<Exemplaire> exemplaires) {
-        this.exemplaires = exemplaires;
+    public void setLauteurs(List<Auteur> lauteurs) {
+        this.lauteurs = lauteurs;
     }
 
-    public List<Auteur> getAuteurs() {
-        return auteurs;
+    public List<Exemplaire> getLex() {
+        return lex;
     }
 
-    public void setAuteurs(List<Auteur> auteurs) {
-        this.auteurs = auteurs;
+    public void setLex(List<Exemplaire> lex) {
+        this.lex = lex;
     }
 
     @Override
@@ -104,13 +103,13 @@ public abstract class Ouvrage {
         return "Ouvrage{" +
                 "titre='" + titre + '\'' +
                 ", ageMin=" + ageMin +
-                ", dateParution='" + dateParution + '\'' +
-                ", typeOuvrage=" + typeOuvrage +
+                ", dateParution=" + dateParution +
+                ", to=" + to +
                 ", prixLocation=" + prixLocation +
                 ", langue='" + langue + '\'' +
                 ", genre='" + genre + '\'' +
-                ", exemplaires=" + exemplaires +
-                ", auteurs=" + auteurs +
+                ", lauteurs=" + lauteurs +
+                ", lex=" + lex +
                 '}';
     }
 }

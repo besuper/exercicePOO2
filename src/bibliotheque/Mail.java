@@ -1,9 +1,6 @@
 package bibliotheque;
 
-import java.time.LocalDateTime;
-
 public class Mail {
-
     private String objet;
     private String message;
     private String dateEnvoi;

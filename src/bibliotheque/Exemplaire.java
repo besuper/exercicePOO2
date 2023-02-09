@@ -6,64 +6,20 @@ import java.util.Objects;
 
 public class Exemplaire {
 
-    private Long matricule;
+    private String matricule;
     private String descriptionEtat;
-    private Rayon rayon;
+
     private Ouvrage ouvrage;
+    private Rayon rayon;
 
-    private List<Location> locations = new ArrayList<>();
+    private List<Location> lloc= new ArrayList<>();
 
-    public Exemplaire(long matricule, String descriptionEtat, Rayon rayon, Ouvrage ouvrage) {
+
+    public Exemplaire(String matricule, String descriptionEtat,Ouvrage ouvrage) {
         this.matricule = matricule;
-        this.descriptionEtat = descriptionEtat;
-        this.rayon = rayon;
+        this.descriptionEtat=descriptionEtat;
         this.ouvrage = ouvrage;
-        this.ouvrage.getExemplaires().add(this);
-    }
-
-    public Long getMatricule() {
-        return matricule;
-    }
-
-    public void setMatricule(Long matricule) {
-        this.matricule = matricule;
-    }
-
-    public String getDescriptionEtat() {
-        return descriptionEtat;
-    }
-
-    public void setDescriptionEtat(String descriptionEtat) {
-        this.descriptionEtat = descriptionEtat;
-    }
-
-    public Rayon getRayon() {
-        return rayon;
-    }
-
-    public void setRayon(Rayon rayon) {
-        if(this.rayon != null) {
-            this.rayon.getExemplaires().remove(this);
-        }
-
-        this.rayon = rayon;
-        this.rayon.getExemplaires().add(this);
-    }
-
-    public Ouvrage getOuvrage() {
-        return ouvrage;
-    }
-
-    public void setOuvrage(Ouvrage ouvrage) {
-        this.ouvrage = ouvrage;
-    }
-
-    public List<Location> getLocations() {
-        return locations;
-    }
-
-    public void setLocations(List<Location> locations) {
-        this.locations = locations;
+        this.ouvrage.getLex().add(this);
     }
 
     @Override
@@ -79,14 +35,55 @@ public class Exemplaire {
         return Objects.hash(matricule);
     }
 
+    public String getMatricule() {
+        return matricule;
+    }
+
+    public void setMatricule(String matricule) {
+        this.matricule = matricule;
+    }
+
+    public String getDescriptionEtat() {
+        return descriptionEtat;
+    }
+
+    public void setDescriptionEtat(String descriptionEtat) {
+        this.descriptionEtat = descriptionEtat;
+    }
+
+     public Ouvrage getOuvrage() {
+        return ouvrage;
+    }
+
+    public void setOuvrage(Ouvrage ouvrage) {
+        this.ouvrage = ouvrage;
+    }
+
+    public Rayon getRayon() {
+        return rayon;
+    }
+
+    public void setRayon(Rayon rayon) {
+        if(this.rayon!=null) this.rayon.getLex().remove(this);
+        this.rayon=rayon;
+        this.rayon.getLex().add(this);
+    }
+
+    public List<Location> getLloc() {
+        return lloc;
+    }
+
+    public void setLloc(List<Location> lloc) {
+        this.lloc = lloc;
+    }
+
     @Override
     public String toString() {
         return "Exemplaire{" +
-                "matricule=" + matricule +
+                "matricule='" + matricule + '\'' +
                 ", descriptionEtat='" + descriptionEtat + '\'' +
-                ", rayon=" + rayon +
                 ", ouvrage=" + ouvrage +
-                ", locations=" + locations +
+                ", rayon=" + rayon +
                 '}';
     }
 }

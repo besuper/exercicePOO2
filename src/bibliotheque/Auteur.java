@@ -1,16 +1,14 @@
 package bibliotheque;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Auteur {
-
-    private String nom;
-    private String prenom;
+    private  String nom,prenom;
     private String nationalite;
-
-    private List<Ouvrage> ouvrages = new ArrayList<>();
+    private List<Ouvrage> louvrage = new ArrayList<>();
 
     public Auteur(String nom, String prenom, String nationalite) {
         this.nom = nom;
@@ -42,12 +40,12 @@ public class Auteur {
         this.nationalite = nationalite;
     }
 
-    public List<Ouvrage> getOuvrages() {
-        return ouvrages;
+    public List<Ouvrage> getLouvrage() {
+        return louvrage;
     }
 
-    public void setOuvrages(List<Ouvrage> ouvrages) {
-        this.ouvrages = ouvrages;
+    public void setLouvrage(List<Ouvrage> louvrage) {
+        this.louvrage = louvrage;
     }
 
     @Override
@@ -69,7 +67,6 @@ public class Auteur {
                 "nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
                 ", nationalite='" + nationalite + '\'' +
-                ", ouvrages=" + ouvrages +
                 '}';
     }
 }
