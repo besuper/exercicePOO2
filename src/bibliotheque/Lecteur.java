@@ -89,6 +89,16 @@ public class Lecteur {
         this.lloc = lloc;
     }
 
+    public void ajoutLocation(Location l) {
+        this.lloc.add(l);
+        l.setLoueur(this);
+    }
+
+    public void suppLocation(Location l) {
+        this.lloc.remove(l);
+        l.setLoueur(null);
+    }
+
     @Override
     public String toString() {
         return "Lecteur{" +

@@ -22,6 +22,16 @@ public class Exemplaire {
         this.ouvrage.getLex().add(this);
     }
 
+    public void ajoutRayon(Rayon r) {
+        this.setRayon(r);
+        r.getLex().add(this);
+    }
+
+    public void suppRayon(Rayon r) {
+        this.setRayon(null);
+        r.getLex().remove(this);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
