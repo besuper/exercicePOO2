@@ -22,6 +22,11 @@ public class Exemplaire {
         this.ouvrage.getLex().add(this);
     }
 
+    public void ajoutLocation(Location l) {
+        this.lloc.add(l);
+        l.setExemplaire(this);
+    }
+
     public void ajoutRayon(Rayon r) {
         this.setRayon(r);
         r.getLex().add(this);
