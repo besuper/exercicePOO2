@@ -14,6 +14,16 @@ public class Rayon {
         this.genre = genre;
     }
 
+    public void ajoutExemplaire(Exemplaire e) {
+        e.setRayon(this);
+        this.lex.add(e);
+    }
+
+    public void removeExemplaire(Exemplaire e) {
+        e.setRayon(null);
+        this.lex.remove(e);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

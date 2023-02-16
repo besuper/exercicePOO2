@@ -49,7 +49,7 @@ public class Gestion {
         Exemplaire e = new Exemplaire("m12","état neuf",l);
         lex.add(e);
 
-        e.ajoutRayon(r);
+        r.ajoutExemplaire(e);
 
         r = new Rayon("r45","science fiction");
         lrayon.add(r);
@@ -57,7 +57,7 @@ public class Gestion {
         e = new Exemplaire("d12","griffé",d);
         lex.add(e);
 
-        e.ajoutRayon(r);
+        r.ajoutExemplaire(e);
 
         Lecteur lec = new Lecteur(1,"Dupont","Jean",LocalDate.of(2000,1,4),"Mons","jean.dupont@mail.com","0458774411");
         llect.add(lec);

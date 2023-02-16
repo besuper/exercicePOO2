@@ -53,9 +53,9 @@ public class Auteur {
         a.getLauteurs().add(this);
     }
 
-    public void suppOuvrage(Ouvrage a) {
-        this.louvrage.remove(a);
+    public void removeOuvrage(Ouvrage a) {
         a.getLauteurs().remove(this);
+        this.louvrage.remove(a);
     }
 
     public void listerOuvrages() {

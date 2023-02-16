@@ -22,16 +22,6 @@ public class Exemplaire {
         this.ouvrage.getLex().add(this);
     }
 
-    public void ajoutRayon(Rayon r) {
-        this.setRayon(r);
-        r.getLex().add(this);
-    }
-
-    public void suppRayon(Rayon r) {
-        this.setRayon(null);
-        r.getLex().remove(this);
-    }
-
     public void modifierEtat(String etat) {
         // TODO: modifier l'état actuel
     }
