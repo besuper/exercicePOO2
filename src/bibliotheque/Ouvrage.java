@@ -27,6 +27,10 @@ public abstract class Ouvrage {
         this.genre = genre;
     }
 
+    public void removeExemplaire(Exemplaire e) {
+        this.getLex().remove(e);
+    }
+
     public String getTitre() {
         return titre;
     }

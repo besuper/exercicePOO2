@@ -3,6 +3,7 @@ package bibliotheque;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Gestion {
 
@@ -13,6 +14,7 @@ public class Gestion {
     private static List<Exemplaire> lex = new ArrayList<>();
     private static List<Rayon> lrayon= new ArrayList<>();
     private static List<Location> lloc = new ArrayList<>();
+    private static Scanner sc = new Scanner(System.in);
 
 
     public static void populate(){
@@ -74,8 +76,71 @@ public class Gestion {
         lloc.add(loc);
     }
     public static void main(String[] args) {
-
         populate();
 
+        int choice;
+        String[] menus = {
+                "Ajout Auteur",
+                "Ajout Ouvrage",
+                "Ajout Lecteur",
+                "Ajout Rayon",
+                "Ajout Exemplaire",
+                "Louer",
+                "Rendre",
+                "Fin"
+        };
+
+        do {
+            System.out.println();
+            choice = menu(menus);
+
+            switch (choice) {
+                case 1 -> gestAuteurs();
+                case 2 -> gestOuvrage();
+                case 3 -> gestLecteur();
+                case 4 -> gestRayon();
+                case 5 -> gestExemplaire();
+                case 6 -> gestLouer();
+                case 7 -> gestRendre();
+            }
+
+        } while (choice != 8);
+
+    }
+
+    public static void gestAuteurs() {
+
+    }
+
+    public static void gestOuvrage() {
+
+    }
+
+    public static void gestLecteur() {
+
+    }
+
+    public static void gestRayon() {
+
+    }
+
+    public static void gestExemplaire() {
+
+    }
+
+    public static void gestLouer() {
+
+    }
+
+    public static void gestRendre() {
+
+    }
+
+    public static int menu(String[] menus) {
+        for (int a = 0; a < menus.length; a++) {
+            System.out.println((a + 1) + ". " + menus[a]);
+        }
+
+        return sc.nextInt();
     }
 }
