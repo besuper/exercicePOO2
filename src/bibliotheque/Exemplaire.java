@@ -22,11 +22,6 @@ public class Exemplaire {
         this.ouvrage.getLex().add(this);
     }
 
-    public void ajoutLocation(Location l) {
-        this.lloc.add(l);
-        l.setExemplaire(this);
-    }
-
     public void ajoutRayon(Rayon r) {
         this.setRayon(r);
         r.getLex().add(this);
@@ -35,6 +30,43 @@ public class Exemplaire {
     public void suppRayon(Rayon r) {
         this.setRayon(null);
         r.getLex().remove(this);
+    }
+
+    public void modifierEtat(String etat) {
+        // TODO: modifier l'état actuel
+    }
+
+    public Lecteur lecteurActuel() {
+        // TODO: retourner le lecteur actuel
+        return null;
+    }
+
+    public List<Lecteur> lecteurs() {
+        // TODO: retourner la liste de tous les lecteurs
+        return null;
+    }
+
+    public void enVoiMailLecteurActuel(Mail mail) {
+        // TODO: envoyer un mail au lecteur actuel
+    }
+
+    public void envoiMailLecteurs(Mail mail) {
+        // TODO: envoyer un mail a tous les lecteurs
+    }
+
+    public boolean enRetard() {
+        // TODO: retourner si le retour de l'exemplaire est en retard
+        return false;
+    }
+
+    public int joursRetard() {
+        // TODO: retourner le nombre de jours de retard
+        return 0;
+    }
+
+    public boolean enLocation() {
+        // TODO: retourner si l'exemplaire est en location ou non
+        return false;
     }
 
     @Override

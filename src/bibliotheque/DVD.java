@@ -59,6 +59,11 @@ public class DVD extends Ouvrage{
         this.sousTitres = sousTitres;
     }
 
+    public double amendeRetard(int njours) {
+        // TODO: retourner le montant de l'amende basé sur les jours
+        return 0.0;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -39,6 +39,11 @@ public class CD extends Ouvrage{
         this.dureeTotale = dureeTotale;
     }
 
+    public double amendeRetard(int njours) {
+        // TODO: retourner le montant de l'amende basé sur les jours
+        return 0.0;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

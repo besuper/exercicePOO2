@@ -14,6 +14,9 @@ public class Location {
         this.dateRestitution = dateRestitution;
         this.loueur = loueur;
         this.exemplaire = exemplaire;
+
+        this.loueur.getLloc().add(this);
+        this.exemplaire.getLloc().add(this);
     }
 
     public Location(Lecteur loueur, Exemplaire exemplaire) {
@@ -51,6 +54,14 @@ public class Location {
 
     public void setExemplaire(Exemplaire exemplaire) {
         this.exemplaire = exemplaire;
+    }
+
+    public void calculerAmende() {
+        // TODO: définir l'amende selon les jours de retard
+    }
+
+    public void enregistrerRetour() {
+        // TODO: définir la location comme terminée
     }
 
     @Override

@@ -89,14 +89,12 @@ public class Lecteur {
         this.lloc = lloc;
     }
 
-    public void ajoutLocation(Location l) {
-        this.lloc.add(l);
-        l.setLoueur(this);
+    public void listerExemplairesEnLocation(){
+        // TODO: afficher la liste des exemplaires en location
     }
 
-    public void suppLocation(Location l) {
-        this.lloc.remove(l);
-        l.setLoueur(null);
+    public void listerExemplairesLoues() {
+        // TODO: afficher les exemplaires loué
     }
 
     @Override

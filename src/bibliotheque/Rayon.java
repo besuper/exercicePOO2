@@ -59,5 +59,8 @@ public class Rayon {
         this.lex = lex;
     }
 
+    public void listerExamplaires() {
+        //TODO: afficher la liste des lecteurs
+    }
 
 }

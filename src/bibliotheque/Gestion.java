@@ -64,18 +64,12 @@ public class Gestion {
 
         Location loc = new Location(LocalDate.of(2023,2,1),LocalDate.of(2023,3,1),lec,e);
 
-        lec.ajoutLocation(loc);
-        e.ajoutLocation(loc);
-
         lloc.add(loc);
 
         lec = new Lecteur(1,"Durant","Aline",LocalDate.of(1980,10,10),"Binche","aline.durant@mail.com","045874444");
         llect.add(lec);
 
         loc = new Location(LocalDate.of(2023,2,5),LocalDate.of(2023,3,5),lec,e);
-
-        lec.ajoutLocation(loc);
-        e.ajoutLocation(loc);
 
         lloc.add(loc);
     }
