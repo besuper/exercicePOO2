@@ -1,4 +1,4 @@
-package bibliotheque;
+package bibliotheque.metier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,43 +20,6 @@ public class Exemplaire {
         this.descriptionEtat=descriptionEtat;
         this.ouvrage = ouvrage;
         this.ouvrage.getLex().add(this);
-    }
-
-    public void modifierEtat(String etat) {
-        // TODO: modifier l'état actuel
-    }
-
-    public Lecteur lecteurActuel() {
-        // TODO: retourner le lecteur actuel
-        return null;
-    }
-
-    public List<Lecteur> lecteurs() {
-        // TODO: retourner la liste de tous les lecteurs
-        return null;
-    }
-
-    public void enVoiMailLecteurActuel(Mail mail) {
-        // TODO: envoyer un mail au lecteur actuel
-    }
-
-    public void envoiMailLecteurs(Mail mail) {
-        // TODO: envoyer un mail a tous les lecteurs
-    }
-
-    public boolean enRetard() {
-        // TODO: retourner si le retour de l'exemplaire est en retard
-        return false;
-    }
-
-    public int joursRetard() {
-        // TODO: retourner le nombre de jours de retard
-        return 0;
-    }
-
-    public boolean enLocation() {
-        // TODO: retourner si l'exemplaire est en location ou non
-        return false;
     }
 
     @Override
@@ -93,7 +56,9 @@ public class Exemplaire {
     }
 
     public void setOuvrage(Ouvrage ouvrage) {
+        if(this.ouvrage!=null) this.ouvrage.getLex().remove(this);
         this.ouvrage = ouvrage;
+        this.ouvrage.getLex().add(this);
     }
 
     public Rayon getRayon() {
@@ -123,4 +88,43 @@ public class Exemplaire {
                 ", rayon=" + rayon +
                 '}';
     }
+
+    public void modifierEtat(String etat){
+        //TODO modifier etat exemplaire
+    }
+
+    public Lecteur lecteurActuel(){
+        //TODO lecteur actuel exemplaire
+        return null;
+    }
+    public List<Lecteur> lecteurs(){
+        //lecteurs exemplaire
+        return null;
+    }
+
+    public void envoiMailLecteurActuel(Mail mail){
+        //TODO envoi mail lecteur exemplaire
+    }
+    public void envoiMailLecteurs(Mail mail){
+        //TODO envoi mail lecteurs exemplaire
+    }
+
+    public boolean enRetard(){
+        //TODO enretard exeplaire
+        return false;
+    }
+
+    public int joursRetard(){
+        //TODO jours retard exemplaire
+        return 0;
+    }
+
+
+    public boolean enLocation(){
+        //TODO en location exemplaires
+        return false;
+    }
+
+
+
 }

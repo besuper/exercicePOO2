@@ -1,4 +1,4 @@
-package bibliotheque;
+package bibliotheque.metier;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -50,11 +50,6 @@ public class Livre extends Ouvrage{
         this.resume = resume;
     }
 
-    public double amendeRetard(int njours) {
-        // TODO: retourner le montant de l'amende basé sur les jours
-        return 0.0;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -66,6 +61,12 @@ public class Livre extends Ouvrage{
     @Override
     public int hashCode() {
         return Objects.hash(isbn);
+    }
+
+    @Override
+    public double amendeRetard(int njours) {
+        //TODO amendeRetard livre
+        return 0;
     }
 
     @Override

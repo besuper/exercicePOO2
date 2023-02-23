@@ -1,6 +1,5 @@
-package bibliotheque;
+package bibliotheque.metier;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -48,27 +47,7 @@ public class Auteur {
         this.louvrage = louvrage;
     }
 
-    public void ajoutOuvrage(Ouvrage a) {
-        this.louvrage.add(a);
-        a.getLauteurs().add(this);
-    }
 
-    public void removeOuvrage(Ouvrage a) {
-        a.getLauteurs().remove(this);
-        this.louvrage.remove(a);
-    }
-
-    public void listerOuvrages() {
-        // TODO: afficher la liste des ouvrages
-    }
-
-    public void listerOuvrages(TypeOuvrage typeOuvrage, TypeLivre typeLivre) {
-        // TODO: afficher la liste des ouvrages selon le type et le type de livre
-    }
-
-    public void listerOuvrages(String genre) {
-        // TODO: afficher la liste des ouvrages selon le genre
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -90,5 +69,33 @@ public class Auteur {
                 ", prenom='" + prenom + '\'' +
                 ", nationalite='" + nationalite + '\'' +
                 '}';
+    }
+
+    public void addOuvrage(Ouvrage o ){
+        louvrage.add(o);
+        o.getLauteurs().add(this);
+    }
+
+    public void remove(Ouvrage o){
+        louvrage.remove(o);
+        o.getLauteurs().remove(this);
+    }
+
+    public List<Ouvrage> listerOuvrages(){
+        //TODO lister ouvrages
+        return null;
+    }
+
+    public List<Ouvrage> listerOuvrages(TypeOuvrage to){
+        //TODO lister ouvrages d'un type
+        return null;
+    }
+    public List<Livre> listerLivres(TypeLivre tl){
+        //TODO lister livres d'un type
+        return null;
+    }
+    public List<Ouvrage> listerOuvrages(String genre){
+        //TODO lister ouvrages d'un genre
+        return null;
     }
 }

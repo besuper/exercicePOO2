@@ -1,4 +1,4 @@
-package bibliotheque;
+package bibliotheque.metier;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -89,14 +89,6 @@ public class Lecteur {
         this.lloc = lloc;
     }
 
-    public void listerExemplairesEnLocation(){
-        // TODO: afficher la liste des exemplaires en location
-    }
-
-    public void listerExemplairesLoues() {
-        // TODO: afficher les exemplaires loué
-    }
-
     @Override
     public String toString() {
         return "Lecteur{" +
@@ -121,5 +113,15 @@ public class Lecteur {
     @Override
     public int hashCode() {
         return Objects.hash(numlecteur);
+    }
+
+    public List<Exemplaire> listerExemplairesEnLocation(){
+        //TODO lister exemplaires en location lecteur
+        return null;
+    }
+
+    public List<Exemplaire> listerExemplairesEnLoues(){
+        //TODO lister exemplaires loues lecteur
+        return null;
     }
 }

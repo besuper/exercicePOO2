@@ -1,4 +1,4 @@
-package bibliotheque;
+package bibliotheque.metier;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -59,11 +59,6 @@ public class DVD extends Ouvrage{
         this.sousTitres = sousTitres;
     }
 
-    public double amendeRetard(int njours) {
-        // TODO: retourner le montant de l'amende basé sur les jours
-        return 0.0;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -76,7 +71,11 @@ public class DVD extends Ouvrage{
     public int hashCode() {
         return Objects.hash(code);
     }
-
+    @Override
+    public double amendeRetard(int njours) {
+        //TODO amendeRetard DVD
+        return 0;
+    }
     @Override
     public String toString() {
         return super.toString()+"DVD{" +
