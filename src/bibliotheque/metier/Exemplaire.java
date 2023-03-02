@@ -1,8 +1,11 @@
 package bibliotheque.metier;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 public class Exemplaire {
 
@@ -90,41 +93,96 @@ public class Exemplaire {
     }
 
     public void modifierEtat(String etat){
-        //TODO modifier etat exemplaire
+        this.descriptionEtat = etat;
     }
 
     public Lecteur lecteurActuel(){
-        //TODO lecteur actuel exemplaire
+        if (this.lloc.size() == 0) {
+            return null;
+        }
+
+        Location loc = this.lloc.get(this.lloc.size() - 1);
+
+        if(loc.getDateRestitution() == null) {
+            return loc.getLoueur();
+        }
+
         return null;
     }
     public List<Lecteur> lecteurs(){
-        //lecteurs exemplaire
-        return null;
+        List<Lecteur> temp_lecteurs = new ArrayList<>();
+
+        for(Location location : this.lloc) {
+            temp_lecteurs.add(location.getLoueur());
+        }
+
+        return temp_lecteurs;
     }
 
     public void envoiMailLecteurActuel(Mail mail){
-        //TODO envoi mail lecteur exemplaire
+        Lecteur actuel = lecteurActuel();
+
+        if(actuel == null) {
+            System.out.println("Aucun lecteur actuel");
+            return;
+        }
+
+        System.out.println("Envoi mail a " + actuel.getNom());
+        System.out.println(mail.getMessage());
     }
     public void envoiMailLecteurs(Mail mail){
-        //TODO envoi mail lecteurs exemplaire
+        for(Lecteur l : lecteurs()) {
+            System.out.println("Envoi mail a " + l.getNom());
+            System.out.println(mail.getMessage());
+        }
     }
 
     public boolean enRetard(){
-        //TODO enretard exeplaire
-        return false;
+        if(this.lloc.size() == 0) return false;
+
+        Location l = this.lloc.get(this.lloc.size() - 1);
+
+        double days_between = DAYS.between(l.getDateLocation(), l.getDateRestitution());
+
+        boolean retard = switch (this.getOuvrage().getTo()) {
+            case LIVRE -> days_between > 15;
+            case CD -> days_between > 7;
+            case DVD -> days_between > 3;
+        };
+
+        return retard;
     }
 
     public int joursRetard(){
-        //TODO jours retard exemplaire
-        return 0;
+        if(this.lloc.size() == 0) return 0;
+
+        Location l = this.lloc.get(this.lloc.size() - 1);
+
+        LocalDate tempDebut = l.getDateLocation();
+        LocalDate end = l.getDateRestitution();
+
+        LocalDate realEnd = switch (this.getOuvrage().getTo()) {
+            case LIVRE -> l.getDateLocation().plusDays(15);
+            case CD -> l.getDateLocation().plusDays(7);
+            case DVD -> l.getDateLocation().plusDays(3);
+        };
+
+        int days_between = (int)DAYS.between(end, realEnd);
+
+        if (days_between < 0) {
+            return 0;
+        }
+
+        return days_between;
     }
 
 
     public boolean enLocation(){
-        //TODO en location exemplaires
-        return false;
+        if(this.lloc.size() == 0) return false;
+
+        Location l = this.lloc.get(this.lloc.size() - 1);
+
+        return l.getDateRestitution() == null;
     }
-
-
 
 }

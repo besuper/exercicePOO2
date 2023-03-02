@@ -53,8 +53,7 @@ public class CD extends Ouvrage{
     }
     @Override
     public double amendeRetard(int njours) {
-        //TODO amendeRetard CD
-        return 0;
+        return njours * 1.0;
     }
     @Override
     public String toString() {

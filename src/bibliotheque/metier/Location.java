@@ -3,6 +3,8 @@ package bibliotheque.metier;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 public class Location {
     private LocalDate dateLocation;
     private LocalDate dateRestitution;
@@ -80,10 +82,21 @@ public class Location {
     }
 
     public double calculerAmende(){
-        //TODO calcul amende location sur base dote restitution : la durée du prêt est de 15 jours pour les livres, 3 jours pour les DVD et 7 jours pour les CD
-        return 0;
+        double days_between = DAYS.between(this.dateLocation, this.dateRestitution);
+
+        switch (this.exemplaire.getOuvrage().getTo()) {
+            case LIVRE -> days_between -= 15.0;
+            case CD -> days_between -= 7.0;
+            case DVD -> days_between -= 3.0;
+        }
+
+        if(days_between < 0.0) {
+            return 0;
+        }
+
+        return this.getExemplaire().getOuvrage().amendeRetard((int) days_between);
     }
     public void enregistrerRetour(){
-        //TODO enregistrer retour => la date de restitution devient égale à la date actuelle
+        this.dateRestitution = LocalDate.now();
     }
 }

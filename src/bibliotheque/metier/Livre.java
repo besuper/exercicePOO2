@@ -65,8 +65,7 @@ public class Livre extends Ouvrage{
 
     @Override
     public double amendeRetard(int njours) {
-        //TODO amendeRetard livre
-        return 0;
+        return njours * 4;
     }
 
     @Override
