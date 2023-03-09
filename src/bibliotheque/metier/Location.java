@@ -1,9 +1,9 @@
 package bibliotheque.metier;
 
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
-
-import static java.time.temporal.ChronoUnit.DAYS;
 
 public class Location {
     private LocalDate dateLocation;
@@ -82,21 +82,17 @@ public class Location {
     }
 
     public double calculerAmende(){
-        double days_between = DAYS.between(this.dateLocation, this.dateRestitution);
-
-        switch (this.exemplaire.getOuvrage().getTo()) {
-            case LIVRE -> days_between -= 15.0;
-            case CD -> days_between -= 7.0;
-            case DVD -> days_between -= 3.0;
-        }
-
-        if(days_between < 0.0) {
-            return 0;
-        }
-
-        return this.getExemplaire().getOuvrage().amendeRetard((int) days_between);
+         if(dateRestitution!=null){
+           LocalDate dateLim = dateLocation.plusDays(exemplaire.getOuvrage().njlocmax());
+           if(dateRestitution.isAfter(dateLim)){
+               int njretard = (int)ChronoUnit.DAYS.between(dateLim, dateRestitution);
+               return exemplaire.getOuvrage().amendeRetard(njretard);
+           }
+       }
+        return 0;
     }
+
     public void enregistrerRetour(){
-        this.dateRestitution = LocalDate.now();
+       if(dateRestitution==null) dateRestitution=LocalDate.now();//test sur nul pour éviter d'enregistrer retour 2 fois
     }
 }

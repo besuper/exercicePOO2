@@ -68,7 +68,7 @@ public class Rayon {
     }
 
     public List<Exemplaire>listerExemplaires(){
-        return this.lex;
+        return lex;
     }
 
 
