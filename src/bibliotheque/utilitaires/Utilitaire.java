@@ -18,6 +18,7 @@ public class Utilitaire {
                 System.out.println("choix :");
                 choix = sc.nextInt();
                 sc.skip("\n");
+
             } while(choix <1 || choix > l.size());
         return choix;
     }
