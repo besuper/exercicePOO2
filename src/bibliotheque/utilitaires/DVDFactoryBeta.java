@@ -43,13 +43,13 @@ public class DVDFactoryBeta {
         do{
             choix=Utilitaire.choixListe(langues);
             if(choix==langues.size())break;
-            dvd.getAutresLangues().add(langues.get(choix-1));
+            dvd.getAutresLangues().add(langues.get(choix-1));//TODO vérifier unicité ou utiliser set et pas de doublon avec langue d'origine
         }while(true);
         System.out.println("sous-titres");
         do{
             choix=Utilitaire.choixListe(langues);
             if(choix==langues.size())break;
-            dvd.getSousTitres().add(langues.get(choix-1));
+            dvd.getSousTitres().add(langues.get(choix-1));//TODO vérifier unicité ou utiliser set
         }while(true);
         return dvd;
     }
