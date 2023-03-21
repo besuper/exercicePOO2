@@ -58,12 +58,28 @@ public class LecteurViewConsole implements LecteurViewInterface {
     }
 
     private void modifier() {
-        //TODO choisir elt et demander les nouvelles valeurs puis appeler méthode maj(lecteur) (à développer) du presenter
+        int choix = Utilitaire.choixElt(llec);
+        Lecteur lecteur = llec.get(choix - 1);
+
+        List<String> options = new ArrayList<>(Arrays.asList("Nom", "Prenom", "Date naissance", "Mail", "Tel", "Adresse", "Retour"));
+
+        int ch = Utilitaire.choixListe(options);
+
+        switch (ch) {
+            case 1 -> lecteur.setNom(sc.next());
+            case 2 -> lecteur.setPrenom(sc.next());
+            case 3 -> lecteur.setDn(Utilitaire.lecDate());
+            case 4 -> lecteur.setMail(sc.next());
+            case 5 -> lecteur.setTel(sc.next());
+            case 6 -> lecteur.setAdresse(sc.nextLine());
+        }
+
+        presenter.maj(lecteur);
     }
 
     private void retirer() {
         int choix = Utilitaire.choixElt(llec);
-        Lecteur lecteur = llec.get(choix-1);
+        Lecteur lecteur = llec.get(choix - 1);
         presenter.removeLecteur(lecteur);
     }
 

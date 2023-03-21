@@ -37,4 +37,15 @@ public class LecteurPresenter {
         List<Lecteur> lecteurs = model.getLecteurs();
         view.setListDatas(lecteurs);
     }
+
+    public void maj(Lecteur lec) {
+        if(model.maj(lec)) {
+            view.affMsg("Lecteur modifié");
+
+            List<Lecteur> lecteurs = model.getLecteurs();
+            view.setListDatas(lecteurs);
+        }else {
+            view.affMsg("Erreur dans la modification du lecteur");
+        }
+    }
 }

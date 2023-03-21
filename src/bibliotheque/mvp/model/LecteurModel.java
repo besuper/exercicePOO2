@@ -23,6 +23,29 @@ public class LecteurModel implements DAOLecteur {
         else return null;
     }
 
+    public boolean maj(Lecteur lec) {
+        boolean present = lecteurs.contains(lec);
+
+        if(!present) {
+            return false;
+        }
+
+        Lecteur oldLecteur = lecteurs.get(lecteurs.indexOf(lec));
+
+        if (oldLecteur.getNumlecteur() != lec.getNumlecteur()) {
+            return false;
+        }
+
+        oldLecteur.setNom(lec.getNom());
+        oldLecteur.setPrenom(lec.getPrenom());
+        oldLecteur.setAdresse(lec.getAdresse());
+        oldLecteur.setMail(lec.getMail());
+        oldLecteur.setTel(lec.getTel());
+        oldLecteur.setDn(lec.getDn());
+
+        return true;
+    }
+
     @Override
     public boolean removeLecteur(Lecteur lec) {
         return lecteurs.remove(lec);

@@ -11,4 +11,6 @@ public interface DAOLecteur {
     boolean removeLecteur(Lecteur lec);
 
     List<Lecteur> getLecteurs();
+
+    boolean maj(Lecteur lec);
 }
