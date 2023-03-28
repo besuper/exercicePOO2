@@ -8,9 +8,9 @@ import java.util.List;
 public interface DAOAuteur {
     Auteur addAuteur(Auteur lec);
 
-    boolean removeAuteur(Auteur lec);
+    Auteur removeAuteur(Auteur lec);
 
     List<Auteur> getAuteurs();
 
-    boolean maj(Auteur lec);
+    Auteur maj(Auteur lec);
 }

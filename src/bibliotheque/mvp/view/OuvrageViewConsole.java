@@ -1,13 +1,18 @@
 package bibliotheque.mvp.view;
 
+import bibliotheque.metier.Auteur;
 import bibliotheque.metier.Ouvrage;
+import bibliotheque.metier.TypeLivre;
+import bibliotheque.metier.TypeOuvrage;
 import bibliotheque.mvp.presenter.OuvragePresenter;
-import bibliotheque.utilitaires.Utilitaire;
+import bibliotheque.utilitaires.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+
+import static bibliotheque.utilitaires.Utilitaire.choixElt;
 
 public class OuvrageViewConsole implements OuvrageViewInterface {
     private OuvragePresenter presenter;
@@ -36,7 +41,7 @@ public class OuvrageViewConsole implements OuvrageViewInterface {
     }
 
     public void menu() {
-        List options = new ArrayList<>(Arrays.asList("ajouter", "retirer", "modifier", "fin"));
+        List options = new ArrayList<>(Arrays.asList("ajouter", "retirer", "modifier", "special", "fin"));
         do {
             int ch = Utilitaire.choixListe(options);
 
@@ -51,6 +56,9 @@ public class OuvrageViewConsole implements OuvrageViewInterface {
                     modifier();
                     break;
                 case 4:
+                    special();
+                    break;
+                case 5:
                     System.exit(0);
             }
         } while (true);
@@ -65,11 +73,24 @@ public class OuvrageViewConsole implements OuvrageViewInterface {
         int ch = Utilitaire.choixListe(options);
 
         switch (ch) {
-            case 1 -> ouvrage.setGenre(sc.next());
-            case 2 -> ouvrage.setAgeMin(sc.nextInt());
-            case 3 -> ouvrage.setLangue(sc.next());
-            case 4 -> ouvrage.setTitre(sc.next());
-            case 5 -> ouvrage.setDateParution(Utilitaire.lecDate());
+            case 1:
+                ouvrage.setGenre(sc.next());
+                break;
+
+            case 2:
+                ouvrage.setAgeMin(sc.nextInt());
+                break;
+            case 3:
+                ouvrage.setLangue(sc.next());
+                break;
+            case 4:
+                ouvrage.setTitre(sc.next());
+                break;
+            case 5:
+                ouvrage.setDateParution(Utilitaire.lecDate());
+                break;
+            default:
+                break;
         }
 
         presenter.maj(ouvrage);
@@ -83,7 +104,43 @@ public class OuvrageViewConsole implements OuvrageViewInterface {
 
 
     private void ajouter() {
+        TypeOuvrage[] tto = TypeOuvrage.values();
+        List<TypeOuvrage> lto = new ArrayList<>(Arrays.asList(tto));
+        int choix = Utilitaire.choixListe(lto);
+        Ouvrage o = null;
+
+        List<OuvrageFactory> lof = new ArrayList<>(Arrays.asList(new LivreFactory(),new CDFactory(),new DVDFactory()));
+        o = lof.get(choix-1).create();
+
+        presenter.addOuvrage(o);
+    }
+
+    private void special() {
+        int choix =  choixElt(ouvrages);
+        Ouvrage lec = ouvrages.get(choix-1);
+
+        do {
+            List<String> options = new ArrayList<>(Arrays.asList("Lister exemplaires", "Lister exemplaires en location", "fin"));
+
+            int ch = Utilitaire.choixListe(options);
+
+            switch (ch) {
+                case 1:
+                    presenter.listerExemplaires(lec);
+                    break;
+                case 2:
+                    presenter.listerExemplairesLocation(lec);
+                    break;
+                case 3:
+                    return;
+                default:
+                    System.out.println("choix invalide recommencez ");
+            }
+        } while (true);
+
 
     }
+
+
 }
 

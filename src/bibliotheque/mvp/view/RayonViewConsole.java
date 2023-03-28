@@ -1,5 +1,6 @@
 package bibliotheque.mvp.view;
 
+import bibliotheque.metier.Ouvrage;
 import bibliotheque.metier.Rayon;
 import bibliotheque.mvp.presenter.RayonPresenter;
 import bibliotheque.utilitaires.Utilitaire;
@@ -8,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+
+import static bibliotheque.utilitaires.Utilitaire.choixElt;
 
 public class RayonViewConsole implements RayonViewInterface {
     private RayonPresenter presenter;
@@ -36,7 +39,7 @@ public class RayonViewConsole implements RayonViewInterface {
     }
 
     public void menu() {
-        List options = new ArrayList<>(Arrays.asList("ajouter", "retirer", "modifier", "fin"));
+        List options = new ArrayList<>(Arrays.asList("ajouter", "retirer", "modifier", "special", "fin"));
         do {
             int ch = Utilitaire.choixListe(options);
 
@@ -51,6 +54,9 @@ public class RayonViewConsole implements RayonViewInterface {
                     modifier();
                     break;
                 case 4:
+                    special();
+                    break;
+                case 5:
                     System.exit(0);
             }
         } while (true);
@@ -75,11 +81,38 @@ public class RayonViewConsole implements RayonViewInterface {
 
     private void ajouter() {
         System.out.println("code ");
-        String code=sc.next();
+        String code = sc.next();
+
         System.out.println("genre ");
-        String genre=sc.next();
-        Rayon r = new Rayon(code,genre);
+        String genre = sc.next();
+
+        Rayon r = new Rayon(code, genre);
         presenter.addRayon(r);
     }
+
+    private void special() {
+        int choix =  choixElt(rayons);
+        Rayon lec = rayons.get(choix-1);
+
+        do {
+            List<String> options = new ArrayList<>(Arrays.asList("Lister exemplaires", "fin"));
+
+            int ch = Utilitaire.choixListe(options);
+
+            switch (ch) {
+                case 1:
+                    presenter.listerExemplaires(lec);
+                    break;
+                case 2:
+                    return;
+                default:
+                    System.out.println("choix invalide recommencez ");
+            }
+        } while (true);
+
+
+    }
+
+
 }
 

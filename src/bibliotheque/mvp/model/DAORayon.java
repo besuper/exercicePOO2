@@ -8,9 +8,9 @@ import java.util.List;
 public interface DAORayon {
     Rayon addRayon(Rayon lec);
 
-    boolean removeRayon(Rayon lec);
+    Rayon removeRayon(Rayon lec);
 
     List<Rayon> getRayons();
 
-    boolean maj(Rayon lec);
+    Rayon maj(Rayon lec);
 }

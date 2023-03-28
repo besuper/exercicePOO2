@@ -1,9 +1,11 @@
 package bibliotheque.mvp.presenter;
 
 import bibliotheque.metier.Auteur;
+import bibliotheque.metier.Exemplaire;
 import bibliotheque.metier.Rayon;
 import bibliotheque.mvp.model.DAOAuteur;
 import bibliotheque.mvp.model.DAORayon;
+import bibliotheque.mvp.model.SpecialRayon;
 import bibliotheque.mvp.view.AuteurViewInterface;
 import bibliotheque.mvp.view.RayonViewInterface;
 
@@ -26,29 +28,46 @@ public class RayonPresenter {
 
     public void addRayon(Rayon lecteur) {
         Rayon lec = model.addRayon(lecteur);
-        if(lec!=null) view.affMsg("création de :"+lec);
-        else view.affMsg("erreur de création");
+
+        if (lec != null) {
+            view.affMsg("création de :" + lec);
+        } else {
+            view.affMsg("erreur de création");
+        }
+
         List<Rayon> lecteurs = model.getRayons();
-        view.setListDatas(lecteurs);
+        //view.setListDatas(lecteurs);
     }
 
 
     public void removeRayon(Rayon lecteur) {
-        boolean ok = model.removeRayon(lecteur);
-        if(ok) view.affMsg("rayon effacé");
-        else view.affMsg("rayon non effacé");
+        Rayon remove = model.removeRayon(lecteur);
+
+        if (remove != null) {
+            view.affMsg("rayon effacé");
+        } else {
+            view.affMsg("rayon non effacé");
+        }
+
         List<Rayon> lecteurs = model.getRayons();
-        view.setListDatas(lecteurs);
+        //view.setListDatas(lecteurs);
     }
 
     public void maj(Rayon lec) {
-        if(model.maj(lec)) {
+        Rayon update = model.maj(lec);
+
+        if (update != null) {
             view.affMsg("Rayon modifié");
 
             List<Rayon> lecteurs = model.getRayons();
-            view.setListDatas(lecteurs);
-        }else {
+            //view.setListDatas(lecteurs);
+        } else {
             view.affMsg("Erreur dans la modification du rayon");
         }
     }
+
+    public List<Exemplaire> listerExemplaires(Rayon rayon) {
+        return ((SpecialRayon)model).listerExemplaires(rayon);
+    }
+
 }

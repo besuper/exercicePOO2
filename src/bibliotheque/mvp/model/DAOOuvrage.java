@@ -8,9 +8,9 @@ import java.util.List;
 public interface DAOOuvrage {
     Ouvrage addOuvrage(Ouvrage lec);
 
-    boolean removeOuvrage(Ouvrage lec);
+    Ouvrage removeOuvrage(Ouvrage lec);
 
     List<Ouvrage> getOuvrages();
 
-    boolean maj(Ouvrage lec);
+    Ouvrage maj(Ouvrage lec);
 }
