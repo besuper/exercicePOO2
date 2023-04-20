@@ -86,13 +86,17 @@ public class LecteurViewConsole implements LecteurViewInterface {
         String nom = modifyIfNotBlank("nom",l.getNom());
         String prenom = modifyIfNotBlank("nom",l.getNom());
         String date = modifyIfNotBlank("date de naissance",getDateFrench(l.getDn()));
-        String[] jma = date.split(" ");
+        LocalDate dn = LocalDate.now();
+        try {
+            String[] jma = date.split(" ");
+            int j = Integer.parseInt(jma[0]);
+            int m = Integer.parseInt(jma[1]);
+            int a = Integer.parseInt(jma[2]);
 
-        int j = Integer.parseInt(jma[0]);
-        int m = Integer.parseInt(jma[1]);
-        int a = Integer.parseInt(jma[2]);
-
-        LocalDate dn = LocalDate.of(a, m, j);
+            dn = LocalDate.of(a, m, j);
+        }catch(Exception e) {
+            System.out.printf("Date invalide");
+        }
 
         String adr = modifyIfNotBlank("adresse",l.getAdresse());
         String mail= modifyIfNotBlank("mail",l.getMail());
@@ -121,11 +125,18 @@ public class LecteurViewConsole implements LecteurViewInterface {
         String prenom = sc.nextLine();
 
         System.out.println("date de naissance");
-        String[] jma = sc.nextLine().split(" ");
-        int j = Integer.parseInt(jma[0]);
-        int m = Integer.parseInt(jma[1]);
-        int a = Integer.parseInt(jma[2]);
-        LocalDate dn = LocalDate.of(a, m, j);
+
+        LocalDate dn = LocalDate.now();
+        try {
+            String[] jma = sc.nextLine().split(" ");
+            int j = Integer.parseInt(jma[0]);
+            int m = Integer.parseInt(jma[1]);
+            int a = Integer.parseInt(jma[2]);
+
+            dn = LocalDate.of(a, m, j);
+        }catch(Exception e) {
+            System.out.printf("Date invalide");
+        }
 
         System.out.println("adresse");
         String adr = sc.nextLine();
