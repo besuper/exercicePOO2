@@ -107,7 +107,12 @@ public class AuteurViewConsole implements AuteurViewInterface {
         System.out.println("nationalité");
         String nat = sc.nextLine();
 
-        Auteur a = new Auteur(nom, prenom, nat);
+        Auteur a = null;
+        try {
+            a = new Auteur(nom, prenom, nat);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         presenter.addAuteur(a);
     }
 

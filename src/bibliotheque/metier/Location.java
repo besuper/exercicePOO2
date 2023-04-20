@@ -11,7 +11,23 @@ public class Location {
     private Lecteur loueur;
     private Exemplaire exemplaire;
 
-    public Location(LocalDate dateLocation, LocalDate dateRestitution, Lecteur loueur, Exemplaire exemplaire) {
+    public Location(LocalDate dateLocation, LocalDate dateRestitution, Lecteur loueur, Exemplaire exemplaire) throws Exception {
+        if(dateLocation == null || dateRestitution == null){
+            throw new Exception("Dates invalide");
+        }
+
+        if(dateLocation.isAfter(dateRestitution)) {
+            throw new Exception("Date de restitution ne peut pas être avant la date de location");
+        }
+
+        if(loueur == null){
+            throw new Exception("Lecteur null");
+        }
+
+        if(exemplaire == null){
+            throw new Exception("Exemplaire null");
+        }
+
         this.dateLocation = dateLocation;
         this.dateRestitution = dateRestitution;
         this.loueur = loueur;
@@ -20,7 +36,15 @@ public class Location {
         this.exemplaire.getLloc().add(this);
     }
 
-    public Location(Lecteur loueur, Exemplaire exemplaire) {
+    public Location(Lecteur loueur, Exemplaire exemplaire) throws Exception {
+        if(loueur == null){
+            throw new Exception("Lecteur null");
+        }
+
+        if(exemplaire == null){
+            throw new Exception("Exemplaire null");
+        }
+
         this.loueur = loueur;
         this.exemplaire = exemplaire;
         this.dateLocation=LocalDate.now();

@@ -20,7 +20,15 @@ public class Exemplaire {
     private List<Location> lloc= new ArrayList<>();
 
 
-    public Exemplaire(String matricule, String descriptionEtat,Ouvrage ouvrage){
+    public Exemplaire(String matricule, String descriptionEtat,Ouvrage ouvrage) throws Exception {
+        if(matricule.isEmpty() || descriptionEtat.isEmpty()) {
+            throw new Exception("Champs vide");
+        }
+
+        if(ouvrage == null){
+            throw new Exception("Ouvrage null");
+        }
+
         this.matricule = matricule;
         this.descriptionEtat=descriptionEtat;
         this.ouvrage = ouvrage;

@@ -107,7 +107,12 @@ public class LecteurViewConsole implements LecteurViewInterface {
         String mail= modifyIfNotBlank("mail",l.getMail());
         String tel =modifyIfNotBlank("tel",l.getTel());
 
-        Lecteur lec = new Lecteur(l.getNumlecteur(), nom, prenom, dn, adr, mail, tel);
+        Lecteur lec = null;
+        try {
+            lec = new Lecteur(l.getNumlecteur(), nom, prenom, dn, adr, mail, tel);
+        } catch (Exception e) {
+            System.out.println("Impossible de créer le lecteur");
+        }
         presenter.update(lec);
         llec=presenter.getAll();//rafraichissement
         Utilitaire.affListe(llec);
@@ -152,7 +157,12 @@ public class LecteurViewConsole implements LecteurViewInterface {
         System.out.println("tel ");
         String tel = sc.nextLine();
 
-        Lecteur lec = new Lecteur(0, nom, prenom, dn, adr, mail, tel);
+        Lecteur lec = null;
+        try {
+            lec = new Lecteur(0, nom, prenom, dn, adr, mail, tel);
+        } catch (Exception e) {
+            System.out.println("Impossible de créer un lecteur");
+        }
 
         presenter.addLecteur(lec);
         llec=presenter.getAll();//rafraichissement

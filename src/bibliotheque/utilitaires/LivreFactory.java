@@ -12,7 +12,7 @@ import java.util.List;
 
 
 public class LivreFactory extends OuvrageFactory{
-      public Ouvrage addDetail(String titre, int ageMin, LocalDate dateParution, double prixLocation, String langue, String genre){
+      public Ouvrage addDetail(String titre, int ageMin, LocalDate dateParution, double prixLocation, String langue, String genre) throws Exception {
         System.out.println("isbn ");
         String isbn = sc.next();
         System.out.println("pages ");

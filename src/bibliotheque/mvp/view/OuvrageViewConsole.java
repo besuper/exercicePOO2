@@ -114,7 +114,11 @@ public class OuvrageViewConsole implements OuvrageViewInterface {
         Ouvrage o = null;
 
         List<OuvrageFactory> lof = new ArrayList<>(Arrays.asList(new LivreFactory(),new CDFactory(),new DVDFactory()));
-        o = lof.get(choix-1).create();
+        try {
+            o = lof.get(choix-1).create();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         presenter.addOuvrage(o);
     }

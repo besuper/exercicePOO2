@@ -21,7 +21,7 @@ public class Gestion {
     private List<Location> lloc = new ArrayList<>();
 
 
-    public void populate(){
+    public void populate() throws Exception {
         Auteur a = new Auteur("Verne","Jules","France");
         laut.add(a);
 
@@ -114,7 +114,11 @@ public class Gestion {
         Exemplaire ex = lex.get(choix-1);
         choix=Utilitaire.choixListe(llect);
         Lecteur lec = llect.get(choix-1);
-        lloc.add(new Location(lec,ex));
+        try {
+            lloc.add(new Location(lec,ex));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void gestLecteurs() {
@@ -137,7 +141,12 @@ public class Gestion {
         String mail=sc.nextLine();
         System.out.println("tel ");
         String tel=sc.nextLine();
-        Lecteur lect = new Lecteur(num,nom,prenom,dn,adr,mail,tel);
+        Lecteur lect = null;
+        try {
+            lect = new Lecteur(num,nom,prenom,dn,adr,mail,tel);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         llect.add(lect);
         System.out.println("lecteur créé");
 
@@ -161,7 +170,12 @@ public class Gestion {
         String etat=sc.next();
         System.out.println("ouvrage ");
         int choix = Utilitaire.choixListe(louv);
-        Exemplaire ex = new Exemplaire(mat,etat,louv.get(choix-1));
+        Exemplaire ex = null;
+        try {
+            ex = new Exemplaire(mat,etat,louv.get(choix-1));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         lex.add(ex);
         System.out.println("exemplaire créé");
         //TODO attribuer rayon , les rayons sont triès par ordre de code
@@ -246,7 +260,11 @@ public class Gestion {
             case 3 : o = new DVDFactoryBeta().create();break;
         }*/
         List<OuvrageFactory> lof = new ArrayList<>(Arrays.asList(new LivreFactory(),new CDFactory(),new DVDFactory()));
-        o = lof.get(choix-1).create();
+        try {
+            o = lof.get(choix-1).create();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         louv.add(o);
         System.out.println("ouvrage créé");
         //TODO attribuer auteurs, les auteur sont triés par odre de nom et prénom, empêcher doublons
@@ -259,13 +277,18 @@ public class Gestion {
         String prenom=sc.nextLine();
         System.out.println("nationalité");
         String nat=sc.nextLine();
-        Auteur a  = new Auteur(nom,prenom,nat);
-        laut.add(a);
+           Auteur a  = null;
+           try {
+               a = new Auteur(nom,prenom,nat);
+           } catch (Exception e) {
+               throw new RuntimeException(e);
+           }
+           laut.add(a);
         System.out.println("écrivain créé");
         //TODO attribuer ouvrages , les ouvrages sont triés par ordre de titre
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Gestion g = new Gestion();
         g.populate();
         g.menu();

@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public  abstract class OuvrageFactory {
    protected Scanner sc= new Scanner(System.in);
-   public Ouvrage create() {
+   public Ouvrage create() throws Exception {
 
        System.out.println("titre");
        String titre= sc.nextLine();
@@ -45,5 +45,5 @@ public  abstract class OuvrageFactory {
        return addDetail(titre, ageMin,dp,ploc, langue,  genre);
     }
 
-    public abstract Ouvrage addDetail(String titre, int ageMin, LocalDate dateParution, double prixLocation, String langue, String genre);
+    public abstract Ouvrage addDetail(String titre, int ageMin, LocalDate dateParution, double prixLocation, String langue, String genre) throws Exception;
 }

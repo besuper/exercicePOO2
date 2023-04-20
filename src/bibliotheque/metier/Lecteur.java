@@ -13,7 +13,11 @@ public class Lecteur {
 
     private List<Location> lloc=new ArrayList<>();
 
-    public Lecteur(int numlecteur, String nom, String prenom, LocalDate dn, String adresse, String mail, String tel) {
+    public Lecteur(int numlecteur, String nom, String prenom, LocalDate dn, String adresse, String mail, String tel) throws Exception {
+        if(dn == null){
+            throw new Exception("Date null");
+        }
+
         this.numlecteur = numlecteur;
         this.nom = nom;
         this.prenom = prenom;

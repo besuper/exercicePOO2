@@ -13,7 +13,11 @@ public class LecteurModel implements DAOLecteur,SpecialLecteur {
     private List<Lecteur> lecteurs = new ArrayList<>();
 
     public LecteurModel(){
-        populate();
+        try {
+            populate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     @Override
     public Lecteur addLecteur(Lecteur lec) {
@@ -53,7 +57,7 @@ public class LecteurModel implements DAOLecteur,SpecialLecteur {
         return lecteurs;
     }
 
-    private void populate(){
+    private void populate() throws Exception {
         Lecteur lec = new Lecteur(0,"Dupont","Jean", LocalDate.of(2000,1,4),"Mons","jean.dupont@mail.com","0458774411");
         addLecteur(lec);
         lec = new Lecteur(0,"Durant","Aline",LocalDate.of(1980,10,10),"Binche","aline.durant@mail.com","045874444");

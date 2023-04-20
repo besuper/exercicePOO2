@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CDFactory extends OuvrageFactory{
-    public Ouvrage addDetail(String titre, int ageMin, LocalDate dateParution, double prixLocation, String langue, String genre){
+    public Ouvrage addDetail(String titre, int ageMin, LocalDate dateParution, double prixLocation, String langue, String genre) throws Exception {
         System.out.println("code : ");
         long code= sc.nextLong();
         System.out.println("nombre de plages :");

@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DVDFactory extends OuvrageFactory{
-    public Ouvrage addDetail(String titre, int ageMin, LocalDate dateParution, double prixLocation, String langue, String genre){
+    public Ouvrage addDetail(String titre, int ageMin, LocalDate dateParution, double prixLocation, String langue, String genre) throws Exception {
         System.out.println("code : ");
         long code= sc.nextLong();
         LocalTime dureeTotale=Utilitaire.lecTime();
