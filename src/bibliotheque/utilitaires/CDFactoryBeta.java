@@ -18,14 +18,29 @@ public class CDFactoryBeta {
 
         System.out.println("titre");
         String titre= sc.nextLine();
+
         System.out.println("age minimum");
-        int ageMin= sc.nextInt();
-        sc.skip("\n");
+
+        int ageMin= 7;
+
+        try{
+            ageMin= sc.nextInt();
+            sc.skip("\n");
+        }catch(Exception e){
+            System.out.println("Age invalide");
+        }
+
         System.out.println("date de parution");
         LocalDate dp= Utilitaire.lecDate();
         System.out.println("prix de location");
-        double ploc = sc.nextDouble();
-        sc.skip("\n");
+        double ploc = 0.0;
+
+        try{
+            ploc = sc.nextDouble();
+            sc.skip("\n");
+        }catch(Exception e){
+            System.out.println("Prix invalide");
+        }
         System.out.println("langue");
         String langue=sc.nextLine();
         System.out.println("genre");

@@ -85,18 +85,23 @@ public class LecteurViewConsole implements LecteurViewInterface {
 
         String nom = modifyIfNotBlank("nom",l.getNom());
         String prenom = modifyIfNotBlank("nom",l.getNom());
-        String date = modifyIfNotBlank("date de naissance",getDateFrench(l.getDn()));
-        LocalDate dn = LocalDate.now();
-        try {
-            String[] jma = date.split(" ");
-            int j = Integer.parseInt(jma[0]);
-            int m = Integer.parseInt(jma[1]);
-            int a = Integer.parseInt(jma[2]);
 
-            dn = LocalDate.of(a, m, j);
-        }catch(Exception e) {
-            System.out.printf("Date invalide");
-        }
+        LocalDate dn = LocalDate.now();
+        do {
+            try {
+                String date = modifyIfNotBlank("date de naissance",getDateFrench(l.getDn()));
+
+                String[] jma = date.split(" ");
+                int j = Integer.parseInt(jma[0]);
+                int m = Integer.parseInt(jma[1]);
+                int a = Integer.parseInt(jma[2]);
+
+                dn = LocalDate.of(a, m, j);
+                break;
+            }catch(Exception e) {
+                System.out.printf("Date invalide");
+            }
+        }while(true);
 
         String adr = modifyIfNotBlank("adresse",l.getAdresse());
         String mail= modifyIfNotBlank("mail",l.getMail());

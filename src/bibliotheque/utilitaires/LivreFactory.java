@@ -16,8 +16,15 @@ public class LivreFactory extends OuvrageFactory{
         System.out.println("isbn ");
         String isbn = sc.next();
         System.out.println("pages ");
-        int nbrePages = sc.nextInt();
-        sc.skip("\n");
+        int nbrePages = 0;
+
+        try{
+            nbrePages = sc.nextInt();
+            sc.skip("\n");
+        }catch(Exception e){
+            System.out.println("Nombre de pages invalide");
+        }
+
         TypeLivre[] ttl = TypeLivre.values();
         List<TypeLivre> ltl = new ArrayList<>(Arrays.asList(ttl));
         int choix = Utilitaire.choixListe(ltl);

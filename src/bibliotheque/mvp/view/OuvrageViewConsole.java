@@ -78,7 +78,11 @@ public class OuvrageViewConsole implements OuvrageViewInterface {
                 break;
 
             case 2:
-                ouvrage.setAgeMin(sc.nextInt());
+                try{
+                    ouvrage.setAgeMin(sc.nextInt());
+                }catch(Exception e){
+                    System.out.println("Mauvais age entré");
+                }
                 break;
             case 3:
                 ouvrage.setLangue(sc.next());
