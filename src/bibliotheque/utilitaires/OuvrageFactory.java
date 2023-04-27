@@ -2,42 +2,23 @@ package bibliotheque.utilitaires;
 
 
 import bibliotheque.metier.Ouvrage;
-import bibliotheque.metier.TypeOuvrage;
+import static bibliotheque.utilitaires.Utilitaire.*;
 
 import java.time.LocalDate;
 import java.util.Scanner;
 
 public  abstract class OuvrageFactory {
    protected Scanner sc= new Scanner(System.in);
-   public Ouvrage create() throws Exception {
+   public Ouvrage create() {
 
        System.out.println("titre");
        String titre= sc.nextLine();
        System.out.println("age minimum");
-
-       int ageMin= 7;
-
-       try{
-           ageMin= sc.nextInt();
-           sc.skip("\n");
-       }catch(Exception e){
-           System.out.println("Age invalide");
-       }
-
+       int ageMin= lireInt();
        System.out.println("date de parution");
-
        LocalDate dp= Utilitaire.lecDate();
        System.out.println("prix de location");
-
-       double ploc = 0.0;
-
-       try{
-           ploc = sc.nextDouble();
-           sc.skip("\n");
-       }catch(Exception e){
-           System.out.println("Prix invalide");
-       }
-
+       double ploc = lireDouble();
        System.out.println("langue");
        String langue=sc.nextLine();
        System.out.println("genre");
@@ -45,5 +26,5 @@ public  abstract class OuvrageFactory {
        return addDetail(titre, ageMin,dp,ploc, langue,  genre);
     }
 
-    public abstract Ouvrage addDetail(String titre, int ageMin, LocalDate dateParution, double prixLocation, String langue, String genre) throws Exception;
+    public abstract Ouvrage addDetail(String titre, int ageMin, LocalDate dateParution, double prixLocation, String langue, String genre);
 }

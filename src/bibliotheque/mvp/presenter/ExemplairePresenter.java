@@ -2,18 +2,18 @@ package bibliotheque.mvp.presenter;
 
 import bibliotheque.metier.Exemplaire;
 import bibliotheque.metier.Lecteur;
-import bibliotheque.metier.Ouvrage;
 import bibliotheque.mvp.model.DAO;
 import bibliotheque.mvp.model.SpecialLecteur;
 import bibliotheque.mvp.view.ViewInterface;
 
 import java.util.List;
 
-public class OuvragePresenter extends Presenter<Ouvrage> {
+public class ExemplairePresenter extends Presenter<Exemplaire> {
 
 
-    public OuvragePresenter(DAO<Ouvrage> model, ViewInterface<Ouvrage> view) {
+    public ExemplairePresenter(DAO<Exemplaire> model, ViewInterface<Exemplaire> view) {
         super(model,view);
     }
+
 
 }

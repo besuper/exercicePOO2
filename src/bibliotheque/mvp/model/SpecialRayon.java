@@ -6,7 +6,5 @@ import bibliotheque.metier.Rayon;
 import java.util.List;
 
 public interface SpecialRayon {
-
-    List<Exemplaire> listerExemplaires(Rayon rayon);
-
+   public List<Exemplaire> listerExemplaires(Rayon r);
 }
