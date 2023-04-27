@@ -1,11 +1,9 @@
 package bibliotheque.metier;
 
-import bibliotheque.utilitaires.Identifiable;
-
 import java.time.LocalDate;
 import java.util.*;
 
-public class Lecteur   {
+public class Lecteur {
     private int numlecteur;
     private  String nom,prenom;
     private LocalDate dn;
@@ -16,7 +14,10 @@ public class Lecteur   {
     private List<Location> lloc=new ArrayList<>();
 
     public Lecteur(int numlecteur, String nom, String prenom, LocalDate dn, String adresse, String mail, String tel) throws Exception {
-if(nom==null || prenom==null ||nom.trim().equals("")||prenom.trim().equals("")) throw new Exception("informations invalides");
+        if(dn == null){
+            throw new Exception("Date null");
+        }
+
         this.numlecteur = numlecteur;
         this.nom = nom;
         this.prenom = prenom;
@@ -131,5 +132,4 @@ if(nom==null || prenom==null ||nom.trim().equals("")||prenom.trim().equals("")) 
         }
        return stex;
     }
-
 }

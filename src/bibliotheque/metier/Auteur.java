@@ -1,21 +1,21 @@
 package bibliotheque.metier;
 
-import bibliotheque.utilitaires.Identifiable;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import static bibliotheque.metier.TypeOuvrage.*;
 
 
-public class Auteur  {
-
+public class Auteur {
     private  String nom,prenom;
     private String nationalite;
     private List<Ouvrage> louvrage = new ArrayList<>();
 
     public Auteur(String nom, String prenom, String nationalite) throws Exception {
-        if(nom==null || nom.trim().equals("")) throw new Exception ("nom vide");
+        if(nom.isEmpty() || prenom.isEmpty() || nationalite.isEmpty()) {
+            throw new Exception("Les champs ne peuvent pas être vide");
+        }
+
         this.nom = nom;
         this.prenom = prenom;
         this.nationalite = nationalite;
@@ -116,5 +116,4 @@ public class Auteur  {
         }
         return lot;
     }
-
 }
