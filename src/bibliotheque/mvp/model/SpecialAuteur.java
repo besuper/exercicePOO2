@@ -5,13 +5,8 @@ import bibliotheque.metier.*;
 import java.util.List;
 
 public interface SpecialAuteur {
+public List<Ouvrage>  listerOuvrages(Auteur a);
+public List<Livre> listerLivre(Auteur a,TypeLivre tl);
 
-    List<Ouvrage> listerOuvrages(Auteur auteur);
-
-    List<Ouvrage> listerOuvrages(Auteur auteur, TypeOuvrage to);
-
-    List<Livre> listerLivres(Auteur auteur, TypeLivre tl);
-
-    List<Ouvrage> listerOuvrages(Auteur auteur, String genre);
-
+public List<Ouvrage> listerOuvrages(Auteur a, String genre);
 }

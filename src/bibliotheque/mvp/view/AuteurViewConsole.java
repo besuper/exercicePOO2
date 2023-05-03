@@ -1,154 +1,134 @@
 package bibliotheque.mvp.view;
 
-import bibliotheque.metier.Auteur;
-import bibliotheque.metier.Lecteur;
-import bibliotheque.metier.TypeLivre;
-import bibliotheque.metier.TypeOuvrage;
+import bibliotheque.metier.*;
 import bibliotheque.mvp.presenter.AuteurPresenter;
-import bibliotheque.utilitaires.Utilitaire;
+import bibliotheque.mvp.presenter.LecteurPresenter;
+import bibliotheque.mvp.presenter.SpecialAuteurPresenter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
-import static bibliotheque.utilitaires.Utilitaire.choixElt;
+import static bibliotheque.utilitaires.Utilitaire.*;
 
-public class AuteurViewConsole implements AuteurViewInterface {
-    private AuteurPresenter presenter;
-    private List<Auteur> auteurs;
-    private Scanner sc = new Scanner(System.in);
 
-    public AuteurViewConsole() {
-
-    }
+public class AuteurViewConsole extends AbstractViewConsole<Auteur> implements SpecialAuteurViewConsole {
 
     @Override
-    public void setPresenter(AuteurPresenter presenter) {
-        this.presenter = presenter;
-    }
+    protected int trie(Auteur o1, Auteur o2) {
+        int nom = o1.getNom().compareTo(o2.getNom());
 
-    @Override
-    public void setListDatas(List<Auteur> auteurs) {
-        this.auteurs = auteurs;
-        Utilitaire.affListe(this.auteurs);
-        menu();
-    }
-
-    @Override
-    public void affMsg(String msg) {
-        System.out.println("information:" + msg);
-    }
-
-    public void menu() {
-        List options = new ArrayList<>(Arrays.asList("ajouter", "retirer", "modifier", "special", "fin"));
-        do {
-            int ch = Utilitaire.choixListe(options);
-
-            switch (ch) {
-                case 1:
-                    ajouter();
-                    break;
-                case 2:
-                    retirer();
-                    break;
-                case 3:
-                    modifier();
-                    break;
-                case 4:
-                    special();
-                    break;
-                case 5:
-                    System.exit(0);
-            }
-        } while (true);
-    }
-
-    private void modifier() {
-        int choix = Utilitaire.choixElt(auteurs);
-        Auteur lecteur = auteurs.get(choix - 1);
-
-        List<String> options = new ArrayList<>(Arrays.asList("Nom", "Prenom", "Nationalité", "Retour"));
-
-        int ch = Utilitaire.choixListe(options);
-
-        switch (ch) {
-            case 1:
-                lecteur.setNom(sc.next());
-                break;
-            case 2:
-                lecteur.setPrenom(sc.next());
-                break;
-            case 3:
-                lecteur.setNationalite(sc.next());
-                break;
-            default:
-                break;
+        if(nom == 0){
+            return nom;
         }
 
-        presenter.maj(lecteur);
+        return o1.getPrenom().compareTo(o2.getPrenom());
     }
 
-    private void retirer() {
-        int choix = Utilitaire.choixElt(auteurs);
-
-        Auteur auteur = auteurs.get(choix - 1);
-        presenter.removeAuteur(auteur);
-    }
-
-
-    private void ajouter() {
-        System.out.println("nom ");
-        String nom = sc.nextLine();
-
-        System.out.println("prénom ");
-        String prenom = sc.nextLine();
-
-        System.out.println("nationalité");
-        String nat = sc.nextLine();
-
-        Auteur a = null;
+    @Override
+    protected void rechercher() {
         try {
-            a = new Auteur(nom, prenom, nat);
-        } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("nom ");
+            String nom = sc.nextLine();
+            System.out.println("prénom ");
+            String prenom = sc.nextLine();
+            System.out.println("nationalité");
+            String nat = sc.nextLine();
+            Auteur rech = new Auteur(nom, prenom, nat);
+            presenter.search(rech);
+        }catch(Exception e){
+            System.out.println("erreur : "+e);
         }
-        presenter.addAuteur(a);
+
     }
 
-    private void special() {
-        int choix =  choixElt(auteurs);
-        Auteur lec = auteurs.get(choix-1);
+    @Override
+    protected void modifier() {
+        int choix = choixElt(ldatas);
+        Auteur a = ldatas.get(choix-1);
+         do {
+            try {
+                String nom = modifyIfNotBlank("nom", a.getNom());
+                String prenom = modifyIfNotBlank("prénom", a.getPrenom());
+                String nat = modifyIfNotBlank("nationalité", a.getNationalite());
+                a.setNom(nom);
+                a.setPrenom(prenom);
+                a.setNationalite(nat);
+                break;
+            } catch (Exception e) {
+                System.out.println("erreur :" + e);
+            }
+        }while(true);
+        presenter.update(a);
+        ldatas=presenter.getAll();//rafraichissement
+        affListe(ldatas);
+    }
 
+    @Override
+    protected void ajouter() {
+        Auteur a;
         do {
-            List<String> options = new ArrayList<>(Arrays.asList("Lister ouvrages", "Lister ouvrages type", "Lister ouvrages genre", "Lister livre", "fin"));
+            try {
+                System.out.println("nom ");
+                String nom = sc.nextLine();
+                System.out.println("prénom ");
+                String prenom = sc.nextLine();
+                System.out.println("nationalité");
+                String nat = sc.nextLine();
+                a = new Auteur(nom, prenom, nat);
+                break;
+            } catch (Exception e) {
+                System.out.println("une erreur est survenue : "+e.getMessage());
+            }
+        }while(true);
+        presenter.add(a);
+    }
 
-            int ch = Utilitaire.choixListe(options);
+    @Override
+    protected void special() {
+        int choix =  choixElt(ldatas);
+        Auteur a = ldatas.get(choix-1);
+
+        List options = new ArrayList<>(Arrays.asList("lister ouvrages", "lister livres", "lister par genre","fin"));
+        do {
+            int ch = choixListe(options);
 
             switch (ch) {
+
                 case 1:
-                    presenter.listerOuvrages(lec);
+                    listerOuvrages(a);
                     break;
                 case 2:
-                    presenter.listerOuvragesType(lec, TypeOuvrage.CD);
+                    listerLivres(a);
                     break;
                 case 3:
-                    presenter.listerOuvragesGenre(lec, "");
+                    listerGenre(a);
                     break;
-                case 4:
-                    presenter.listerLivres(lec, TypeLivre.ROMAN);
-                    break;
-                case 5:
-                    return;
-                default:
-                    System.out.println("choix invalide recommencez ");
+                  case 4 :return;
             }
         } while (true);
 
-
     }
 
+    @Override
+    public void listerGenre(Auteur a) {
+        System.out.println("genre :");
+        String genre = sc.nextLine();
+        ((SpecialAuteurPresenter)presenter).listerOuvrages(a,genre);
+    }
+
+    @Override
+    public void listerOuvrages(Auteur a){
+        ((SpecialAuteurPresenter)presenter).listerOuvrages(a);
+    }
+
+    @Override
+    public void listerLivres(Auteur a){
+        TypeLivre[] tlv = TypeLivre.values();
+        int ch2 = choixListe(List.of(tlv));
+        TypeLivre tl = tlv[ch2-1];
+        ((SpecialAuteurPresenter)presenter).listerLivre(a,tl);
+    }
 
 
 }
-

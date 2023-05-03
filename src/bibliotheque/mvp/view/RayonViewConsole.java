@@ -1,118 +1,96 @@
 package bibliotheque.mvp.view;
 
+import bibliotheque.metier.Exemplaire;
 import bibliotheque.metier.Ouvrage;
 import bibliotheque.metier.Rayon;
+import bibliotheque.mvp.presenter.OuvragePresenter;
 import bibliotheque.mvp.presenter.RayonPresenter;
-import bibliotheque.utilitaires.Utilitaire;
+import bibliotheque.mvp.presenter.SpecialRayonPresenter;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
-import static bibliotheque.utilitaires.Utilitaire.choixElt;
+import static bibliotheque.utilitaires.Utilitaire.*;
 
-public class RayonViewConsole implements RayonViewInterface {
-    private RayonPresenter presenter;
-    private List<Rayon> rayons;
-    private Scanner sc = new Scanner(System.in);
-
-    public RayonViewConsole() {
-
+public class RayonViewConsole extends AbstractViewConsole<Rayon> implements SpecialRayonViewConsole {
+    @Override
+    protected int trie(Rayon o1, Rayon o2) {
+        return o1.getGenre().compareTo(o2.getGenre());
     }
 
     @Override
-    public void setPresenter(RayonPresenter presenter) {
-        this.presenter = presenter;
+    protected void rechercher() {
+      System.out.println("code du rayon : ");
+      String code = sc.nextLine();
+      Rayon rech = new Rayon(code);
+      presenter.search(rech);
     }
 
     @Override
-    public void setListDatas(List<Rayon> lecteurs) {
-        this.rayons = lecteurs;
-        Utilitaire.affListe(rayons);
-        menu();
-    }
-
-    @Override
-    public void affMsg(String msg) {
-        System.out.println("information:" + msg);
-    }
-
-    public void menu() {
-        List options = new ArrayList<>(Arrays.asList("ajouter", "retirer", "modifier", "special", "fin"));
+    protected void modifier() {
+        int choix = choixElt(ldatas);
+       Rayon r= ldatas.get(choix-1);
         do {
-            int ch = Utilitaire.choixListe(options);
-
-            switch (ch) {
-                case 1:
-                    ajouter();
-                    break;
-                case 2:
-                    retirer();
-                    break;
-                case 3:
-                    modifier();
-                    break;
-                case 4:
-                    special();
-                    break;
-                case 5:
-                    System.exit(0);
+            try {
+                String genre = modifyIfNotBlank("nom", r.getGenre());
+                r.setGenre(genre);
+                break;
+            } catch (Exception e) {
+                System.out.println("erreur :" + e);
             }
-        } while (true);
+        }while(true);
+        presenter.update(r);
+        ldatas=presenter.getAll();//rafraichissement
+        affListe(ldatas);
     }
 
-    private void modifier() {
-        int choix = Utilitaire.choixElt(rayons);
-        Rayon lecteur = rayons.get(choix - 1);
-
-        System.out.println("Entrez le nouveau genre : ");
-        lecteur.setGenre(sc.nextLine());
-
-        presenter.maj(lecteur);
-    }
-
-    private void retirer() {
-        int choix = Utilitaire.choixElt(rayons);
-        Rayon lecteur = rayons.get(choix - 1);
-        presenter.removeRayon(lecteur);
-    }
-
-
-    private void ajouter() {
-        System.out.println("code ");
-        String code = sc.next();
-
-        System.out.println("genre ");
-        String genre = sc.next();
-
-        Rayon r = new Rayon(code, genre);
-        presenter.addRayon(r);
-    }
-
-    private void special() {
-        int choix =  choixElt(rayons);
-        Rayon lec = rayons.get(choix-1);
-
+    @Override
+    protected void ajouter() {
+        Rayon r =null;
         do {
-            List<String> options = new ArrayList<>(Arrays.asList("Lister exemplaires", "fin"));
+          try {
+              System.out.println("code rayon ");
+              String code = sc.nextLine();
+              System.out.println("genre ");
+              String genre = sc.nextLine();
+              r = new Rayon(code, genre);
+              presenter.add(r);
+              ldatas=presenter.getAll();//rafraichissement
+              affListe(ldatas);
+              break;
+          }
+          catch (Exception e){
+              System.out.println("une erreur est survenue : "+e);
+          }
+        }while(true);
 
-            int ch = Utilitaire.choixListe(options);
+    }
+
+    @Override
+    protected void special() {
+        int choix =  choixElt(ldatas);
+        Rayon r  = ldatas.get(choix-1);
+
+        List options = new ArrayList<>(Arrays.asList("lister exemplaires","fin"));
+        do {
+            int ch = choixListe(options);
 
             switch (ch) {
+
                 case 1:
-                    presenter.listerExemplaires(lec);
+                    exemplaires(r);
                     break;
-                case 2:
-                    return;
-                default:
-                    System.out.println("choix invalide recommencez ");
+               case 2 :return;
             }
         } while (true);
 
 
     }
 
-
+    @Override
+    public void exemplaires(Rayon r) {
+        ((SpecialRayonPresenter)presenter).listerExemplaires(r);
+    }
 }
-
