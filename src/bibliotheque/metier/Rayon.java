@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Rayon {
+public class Rayon  {
     private String codeRayon;
     private String genre;
     private List<Exemplaire> lex = new ArrayList<>();
@@ -77,5 +77,6 @@ public class Rayon {
     public List<Exemplaire>listerExemplaires(){
         return lex;
     }
+
 
 }

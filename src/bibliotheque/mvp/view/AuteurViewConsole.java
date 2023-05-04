@@ -4,9 +4,11 @@ import bibliotheque.metier.*;
 import bibliotheque.mvp.presenter.AuteurPresenter;
 import bibliotheque.mvp.presenter.LecteurPresenter;
 import bibliotheque.mvp.presenter.SpecialAuteurPresenter;
+import bibliotheque.utilitaires.comparators.AuteurComparator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import static bibliotheque.utilitaires.Utilitaire.*;
@@ -15,15 +17,22 @@ import static bibliotheque.utilitaires.Utilitaire.*;
 public class AuteurViewConsole extends AbstractViewConsole<Auteur> implements SpecialAuteurViewConsole {
 
     @Override
-    protected int trie(Auteur o1, Auteur o2) {
-        int nom = o1.getNom().compareTo(o2.getNom());
+    public void setListDatas(List<Auteur> ldatas){
+      //Comparator<Auteur> cmp = new AuteurComparator();
 
-        if(nom == 0){
-            return nom;
-        }
+    //  ldatas.sort(cmp);
 
-        return o1.getPrenom().compareTo(o2.getPrenom());
-    }
+        ldatas.sort(new Comparator<Auteur>() {
+            @Override
+            public int compare(Auteur o1, Auteur o2) {
+                if(o1.getNom().compareTo(o2.getNom())!=0) return (o1.getNom().compareTo(o2.getNom()));
+                return o1.getPrenom().compareTo(o2.getPrenom())  ;
+            }
+        });
+      super.setListDatas(ldatas);
+  }
+
+
 
     @Override
     protected void rechercher() {

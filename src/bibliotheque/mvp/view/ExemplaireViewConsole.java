@@ -16,11 +16,6 @@ import static bibliotheque.utilitaires.Utilitaire.modifyIfNotBlank;
 
 public class ExemplaireViewConsole extends AbstractViewConsole<Exemplaire> implements SpecialExemplaireViewConsole {
     @Override
-    protected int trie(Exemplaire o1, Exemplaire o2) {
-        return 0;
-    }
-
-    @Override
     protected void rechercher() {
         try{
             System.out.println("matricule : ");

@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Ouvrage{
+public abstract class Ouvrage {
     protected String titre;
     protected int ageMin;
     protected LocalDate dateParution;

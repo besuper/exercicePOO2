@@ -2,7 +2,10 @@
 
     import bibliotheque.mvp.presenter.Presenter;
 
-    import java.util.*;
+    import java.util.ArrayList;
+    import java.util.Arrays;
+    import java.util.List;
+    import java.util.Scanner;
 
     import static bibliotheque.utilitaires.Utilitaire.*;
 
@@ -19,9 +22,6 @@
         @Override
         public void setListDatas(List<T> ldatas) {
             this.ldatas = ldatas;
-
-            trier();
-
             affListe(ldatas);
             menu();
         }
@@ -70,13 +70,6 @@
             ldatas=presenter.getAll();//rafraichissement
             affListe(ldatas);
         }
-
-        protected abstract int trie(T o1, T o2);
-
-        protected void trier() {
-            ldatas.sort(this::trie);
-        }
-
        @Override
         public T selectionner(List<T> l) {
             int nl = choixListe(l);
@@ -89,7 +82,6 @@
 
         protected abstract  void ajouter();
        protected abstract void special();
-
     }
 
 

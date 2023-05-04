@@ -1,6 +1,5 @@
 package bibliotheque.mvp.view;
 
-import bibliotheque.metier.Exemplaire;
 import bibliotheque.metier.Ouvrage;
 import bibliotheque.metier.Rayon;
 import bibliotheque.mvp.presenter.OuvragePresenter;
@@ -15,11 +14,6 @@ import java.util.List;
 import static bibliotheque.utilitaires.Utilitaire.*;
 
 public class RayonViewConsole extends AbstractViewConsole<Rayon> implements SpecialRayonViewConsole {
-    @Override
-    protected int trie(Rayon o1, Rayon o2) {
-        return o1.getGenre().compareTo(o2.getGenre());
-    }
-
     @Override
     protected void rechercher() {
       System.out.println("code du rayon : ");

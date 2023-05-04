@@ -6,7 +6,7 @@ import java.util.Objects;
 import static bibliotheque.metier.TypeOuvrage.*;
 
 
-public class Auteur {
+public class Auteur  {
 
     private  String nom,prenom;
     private String nationalite;
@@ -114,4 +114,5 @@ public class Auteur {
         }
         return lot;
     }
+
 }
