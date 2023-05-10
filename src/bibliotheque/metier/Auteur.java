@@ -92,27 +92,19 @@ public class Auteur  {
 
     public List<Ouvrage> listerOuvrages(TypeOuvrage to){
         List<Ouvrage> lot = new ArrayList<>();
-
-        louvrage.stream().filter((o) -> o.getTo().equals(to)).forEach((o) -> lot.add(o));
-
+        louvrage.stream().filter(o->o.getTo().equals(to)).forEach(o->lot.add(o));
         return lot;
     }
     public List<Livre> listerLivres(TypeLivre tl){
+
         List<Livre>ll = new ArrayList<>();
 
-        louvrage.stream()
-                .filter((o) -> o.getTo().equals(LIVRE))
-                .map((o) -> (Livre)o)
-                .filter((o) -> o.getTl().equals(tl))
-                .forEach((o) -> ll.add(o));
-
+        louvrage.stream().filter(o->o.getTo().equals(LIVRE)).filter(o->((Livre)o).getTl().equals(tl)).forEach(o->ll.add((Livre)o));
         return ll;
     }
     public List<Ouvrage> listerOuvrages(String genre){
         List<Ouvrage> lot = new ArrayList<>();
-
-        louvrage.stream().filter((o) -> o.getGenre().equals(genre)).forEach((o) -> lot.add(o));
-
+        louvrage.stream().filter(o->o.getGenre().equals(genre)).forEach(o->lot.add(o));
         return lot;
     }
 

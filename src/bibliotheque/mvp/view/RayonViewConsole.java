@@ -14,14 +14,6 @@ import java.util.List;
 import static bibliotheque.utilitaires.Utilitaire.*;
 
 public class RayonViewConsole extends AbstractViewConsole<Rayon> implements SpecialRayonViewConsole {
-
-    @Override
-    public void setListDatas(List<Rayon> ldatas) {
-        ldatas.sort((o1, o2) -> o1.getGenre().compareTo(o2.getGenre()));
-
-        super.setListDatas(ldatas);
-    }
-
     @Override
     protected void rechercher() {
       System.out.println("code du rayon : ");

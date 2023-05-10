@@ -17,22 +17,6 @@ import static bibliotheque.utilitaires.Utilitaire.*;
 public class AuteurViewConsole extends AbstractViewConsole<Auteur> implements SpecialAuteurViewConsole {
 
     @Override
-    public void setListDatas(List<Auteur> ldatas){
-      //Comparator<Auteur> cmp = new AuteurComparator();
-
-    //  ldatas.sort(cmp);
-
-        Comparator<Auteur> cmp = (o1, o2) -> o1.getNom().compareTo(o2.getNom());
-        cmp = cmp.thenComparing((o1, o2) -> o1.getPrenom().compareTo(o2.getPrenom()));
-
-        ldatas.sort(cmp);
-
-      super.setListDatas(ldatas);
-  }
-
-
-
-    @Override
     protected void rechercher() {
         try {
             System.out.println("nom ");

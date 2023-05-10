@@ -17,17 +17,8 @@ import java.util.List;
 
 public class LecteurViewConsole extends AbstractViewConsole<Lecteur> implements SpecialLecteurViewConsole {
 
-    @Override
-    public void setListDatas(List<Lecteur> ldatas) {
-        ldatas.sort((o1, o2) -> {
-            if(o1.getNom().compareTo(o2.getNom())!=0) return (o1.getNom().compareTo(o2.getNom()));
-            return o1.getPrenom().compareTo(o2.getPrenom())  ;
-        });
 
-        super.setListDatas(ldatas);
-    }
-
-    protected  void rechercher() {
+  protected  void rechercher() {
       try{
         System.out.println("numLecteur : ");
         int idLecteur = lireInt();
@@ -149,6 +140,7 @@ public class LecteurViewConsole extends AbstractViewConsole<Lecteur> implements 
 
     @Override
     public void lecParMail() {
+      //ajout pour forcer push
         System.out.print("mail recherché : ");
         String mail= sc.next();
         ((SpecialLecteurPresenter)presenter).lecParMail(mail);
