@@ -17,8 +17,17 @@ import java.util.List;
 
 public class LecteurViewConsole extends AbstractViewConsole<Lecteur> implements SpecialLecteurViewConsole {
 
+    @Override
+    public void setListDatas(List<Lecteur> ldatas) {
+        ldatas.sort((o1, o2) -> {
+            if(o1.getNom().compareTo(o2.getNom())!=0) return (o1.getNom().compareTo(o2.getNom()));
+            return o1.getPrenom().compareTo(o2.getPrenom())  ;
+        });
 
-  protected  void rechercher() {
+        super.setListDatas(ldatas);
+    }
+
+    protected  void rechercher() {
       try{
         System.out.println("numLecteur : ");
         int idLecteur = lireInt();
